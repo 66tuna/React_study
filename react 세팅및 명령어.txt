@@ -1,0 +1,19 @@
+파일 추가
+npm init react-app .
+
+react 시작
+npm run start 
+
+react 멈춤
+ctrl+c
+
+개발된 프로젝트 빌드하기
+npm run build
+
+빌드한 것 로컬에서 실행하기
+npx serve build
+
+node_moudles추가
+npm install
+
+

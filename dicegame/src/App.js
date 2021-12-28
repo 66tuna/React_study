@@ -1,30 +1,37 @@
-import {useState} from 'react';
+import { useState } from 'react'; //리액트에서 화면을 변경할때 사용하는 패키지
 import Button from './Button';
-import Dice from './Dice';
-
-function random(n){
+import Board from './Board';
+import './App.css';
+function random(n) {
     return Math.ceil(Math.random() * n);
 }
 
-function App(){
-    const [num, setNum] = useState();
+function App() {
+    const [myHistory, setMyHistory] = useState([]);
+    const [otherHistory, setOtherHistory] = useState([]);
 
     const handleRollClick = () => {
-        const nextNum = random(6);
-        setNum(nextNum);
+        const nextMyNum = random(6);
+        const nextOtherNum = random(6);
+        setMyHistory([...myHistory, nextMyNum]);
+        setOtherHistory([...otherHistory, nextOtherNum]);
     };
 
     const handClearClick = () => {
-        setNum(1);
+        setMyHistory([]);
+        setOtherHistory([]);
     }
 
     return (
-        <div>
+        <div className="App">
             <div>
-                <Button onClick={handleRollClick}>던지기</Button>
-                <Button onClick={handClearClick}>처음부터</Button>
+                <Button className='App-button' color="blue" onClick={handleRollClick}>던지기</Button>
+                <Button className='App-button' color="red" onClick={handClearClick}>처음부터</Button>
             </div>
-            <Dice color="red" num={num} />
+            <div>
+                <Board name="나" color="blue" gameHistory={myHistory}/>
+                <Board name="상대" color="red" gameHistory={otherHistory}/>
+            </div>
         </div>
     );
 }
